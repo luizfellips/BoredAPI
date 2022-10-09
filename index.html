@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Bored API Tests</title>
+    <script src="_js/script.js"></script>
+    <script src="_js/jquery-3.6.1.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="container">
+        <h1>Bored API Tests</h1>
+        <nav class="navbar">
+            <ul>
+                <a href="index.html"><li>Home</li></a>
+                <a href="https://github.com/luizfellips", target="_blank"><li>Other Projects</li></a>
+                <a href="#"><li>About</li></a>
+            </ul>
+        </nav>
+    </header>
+    <div class="app-body">
+        <h1>Generate new activity</h1>
+        <button type="button" id="retrieve">GO!</button>
+        <section class="informations">
+           <h2 class="categories">Activity: <p class="results" id="activity"></p></h2>
+           <h2 class="categories">Type: <p class="results" id="type"></p></h2>
+           <h2 class="categories">Participants: <p class="results" id="participants"></p></h2>
+           <h2 class="categories">Price: <p class="results" id="price"></p></h2>
+        </section>
+    </div>
+</body>
+<script>
+    $(document).ready(function(){
+        hideInfo();
+        $("#retrieve").click(function(){
+            $("#retrieve").css('background-color','rgb(107, 107, 250)');
+            $("#retrieve").text('Retrieving...');
+            $.ajax({
+                type: "GET",
+                url: "https://www.boredapi.com/api/activity",
+                success: function(data){
+                    loadInfo(data);
+                    $("#retrieve").css('background-color','rgb(0, 0, 0)');
+                    $("#retrieve").text('Try again')
+                }
+            })
+
+        })
+    })
+</script>
+
+</html>
